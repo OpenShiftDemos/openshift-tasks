@@ -98,11 +98,11 @@ Below you will find instructions to create, display, and delete tasks.
 
 ### Create a Task
 
-To associate a task called `task1` with the user `quickstartUser`, you must authenticate as user `quickstartUser` and send an HTTP *POST* request to the url 'http://localhost:8080/jboss-tasks-rs/tasks/task1'.
+To associate a task called `task1` with the user `quickstartUser`, you must authenticate as user `demo` and send an HTTP *POST* request to the url 'http://localhost:8080/jboss-tasks-rs/tasks/task1'.
 
 To issue the *POST* command using cURL, type the following command:
 
-    curl -i -u 'quickstartUser:quickstartPwd1!' -H "Content-Length: 0" -X POST http://localhost:8080/jboss-tasks-rs/tasks/task1
+    curl -i -u 'demo:redhat1!' -H "Content-Length: 0" -X POST http://localhost:8080/jboss-tasks-rs/tasks/task1
 
 You will see the following response:
 
@@ -132,46 +132,46 @@ To display the XML representation of the newly created resource, issue a *GET* r
     <http://localhost:8080/jboss-tasks-rs/tasks/1>
 2. To issue a *GET* using cURL, type the following command:
 
-        curl -H "Accept: application/xml" -u 'quickstartUser:quickstartPwd1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks/1
+        curl -H "Accept: application/xml" -u 'demo:redhat1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks/1
 
     The `-H flag tells the server that the client wishes to accept XML content.
 
 Using either of the above *GET* methods, you should see the following XML:
 
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-       <task id="1" ownerName="quickstartUser">
+       <task id="1" ownerName="demo">
           <title>task1</title>
       </task>
 
 
 ### Display the XML Representation of all Tasks for a User
 
-To obtain a list of all tasks for user `quickstartUser` in XML format, authenticate as user `quickstartUser` and send an HTTP `GET` request to the resource `tasks` URL.
+To obtain a list of all tasks for user `demo` in XML format, authenticate as user `demo` and send an HTTP `GET` request to the resource `tasks` URL.
 
 1. To issue a *GET* using a browser, open a browser and access the following URL. You will be challenged to enter valid authentication credentials.
 
     <http://localhost:8080/jboss-tasks-rs/tasks>
 
-2. To list all tasks associated with the user `quickstartUser` using cURL, type:
+2. To list all tasks associated with the user `demo` using cURL, type:
 
-        curl -H "Accept: application/xml" -u 'quickstartUser:quickstartPwd1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks
+        curl -H "Accept: application/xml" -u 'demo:redhat1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks
 
 Using either of the above *GET* methods, you should see the following XML:
 
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <collection>
-        <task id="1" ownerName="quickstartUser">
+        <task id="1" ownerName="demo">
         <title>task1</title>
         </task>
     </collection>
 
 ### Delete a Task
 
-To delete a task, again authenticate as principal `quickstartUser` and send an HTTP *DELETE* request to the URI that represents the task.
+To delete a task, again authenticate as principal `demo` and send an HTTP *DELETE* request to the URI that represents the task.
 
 To delete the task with id `1`:
 
-    curl -i -u 'quickstartUser:quickstartPwd1!' -X DELETE http://localhost:8080/jboss-tasks-rs/tasks/1
+    curl -i -u 'demo:redhat1!' -X DELETE http://localhost:8080/jboss-tasks-rs/tasks/1
 
 You will see this response:
 
@@ -182,9 +182,9 @@ You will see this response:
     Expires: Thu, 01 Jan 1970 01:00:00 GMT
     Date: Sun, 15 Apr 2012 22:51:56 GMT
 
-Now list all tasks associated with user `quickstartUser`:
+Now list all tasks associated with user `demo`:
 
-    curl -u 'quickstartUser:quickstartPwd1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks
+    curl -u 'demo:redhat1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks
 
 You will see a response with an empty collection:
 
@@ -227,11 +227,11 @@ JSON is not part of the JAX-RS standard but most JAX-RS implementations do suppo
 
 Now you can view task resources in JSON media type by specifying the correct Accept header. For example, using the cURL tool, type the following command:
 
-    curl -H "Accept: application/json" -u 'quickstartUser:quickstartPwd1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks/1
+    curl -H "Accept: application/json" -u 'demo:redhat1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks/1
 
 You will see the following response:
 
-    {"id":1,"title":"task1","ownerName":"quickstartUser"}
+    {"id":1,"title":"task1","ownerName":"demo"}
 
 
 Server Log: Expected warnings and errors
