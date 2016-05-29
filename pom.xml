@@ -22,9 +22,7 @@
     <artifactId>jboss-tasks-rs</artifactId>
     <version>6.4.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>JBoss EAP Quickstart: tasks-rs</name>
-    <description>JBoss EAP Quickstart: Tasks JSF JAX-RS</description>
-
+    <name>JBoss EAP - Tasks JAX-RS App</name>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -41,7 +39,7 @@
 
         <!-- JBoss dependency versions -->
         <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
-        
+
         <!-- Define the version of the JBoss BOMs we want to import to specify tested stacks. -->
         <version.jboss.bom.eap>6.4.0.GA</version.jboss.bom.eap>
 
@@ -53,6 +51,17 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
     </properties>
+
+    <distributionManagement>
+      <repository>
+         <id>nexus</id>
+         <url>http://nexus.ci.svc.cluster.local:8081/nexus/content/repositories/releases</url>
+      </repository>
+       <snapshotRepository>
+          <id>nexus</id>
+          <url>http://nexus.ci.svc.cluster.local:8081/nexus/content/repositories/snapshots</url>
+       </snapshotRepository>
+    </distributionManagement>
 
     <dependencyManagement>
         <dependencies>
