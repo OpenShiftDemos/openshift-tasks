@@ -47,7 +47,7 @@ In the following instructions, replace `EAP_HOME` with the actual path to your J
 Add an Application User
 ---------------
 
-This quickstart uses secured management interfaces and requires that you create the following application user to access the running application. 
+This quickstart uses secured management interfaces and requires that you create the following application user to access the running application.
 
 | **UserName** | **Realm** | **Password** | **Roles** |
 |:-----------|:-----------|:-----------|:-----------|
@@ -58,7 +58,7 @@ To add the application user, open a command prompt and type the following comman
         For Linux:   EAP_HOME/bin/add-user.sh -a -u 'quickstartUser' -p 'quickstartPwd1!' -g 'guest'
         For Windows: EAP_HOME\bin\add-user.bat  -a -u 'quickstartUser' -p 'quickstartPwd1!' -g 'guest'
 
-If you prefer, you can use the add-user utility interactively. 
+If you prefer, you can use the add-user utility interactively.
 For an example of how to use the add-user utility, see the instructions located here: [Add an Application User](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CREATE_USERS.md#add-an-application-user).
 
 
@@ -102,7 +102,7 @@ To associate a task called `task1` with the user `quickstartUser`, you must auth
 
 To issue the *POST* command using cURL, type the following command:
 
-    curl -i -u 'demo:redhat1!' -H "Content-Length: 0" -X POST http://localhost:8080/jboss-tasks-rs/tasks/task1
+    curl -i -u 'demo:redhat!1' -H "Content-Length: 0" -X POST http://localhost:8080/jboss-tasks-rs/tasks/task1
 
 You will see the following response:
 
@@ -132,7 +132,7 @@ To display the XML representation of the newly created resource, issue a *GET* r
     <http://localhost:8080/jboss-tasks-rs/tasks/1>
 2. To issue a *GET* using cURL, type the following command:
 
-        curl -H "Accept: application/xml" -u 'demo:redhat1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks/1
+        curl -H "Accept: application/xml" -u 'demo:redhat!1' -X GET http://localhost:8080/jboss-tasks-rs/tasks/1
 
     The `-H flag tells the server that the client wishes to accept XML content.
 
@@ -154,7 +154,7 @@ To obtain a list of all tasks for user `demo` in XML format, authenticate as use
 
 2. To list all tasks associated with the user `demo` using cURL, type:
 
-        curl -H "Accept: application/xml" -u 'demo:redhat1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks
+        curl -H "Accept: application/xml" -u 'demo:redhat!1' -X GET http://localhost:8080/jboss-tasks-rs/tasks
 
 Using either of the above *GET* methods, you should see the following XML:
 
@@ -171,7 +171,7 @@ To delete a task, again authenticate as principal `demo` and send an HTTP *DELET
 
 To delete the task with id `1`:
 
-    curl -i -u 'demo:redhat1!' -X DELETE http://localhost:8080/jboss-tasks-rs/tasks/1
+    curl -i -u 'demo:redhat!1' -X DELETE http://localhost:8080/jboss-tasks-rs/tasks/1
 
 You will see this response:
 
@@ -184,7 +184,7 @@ You will see this response:
 
 Now list all tasks associated with user `demo`:
 
-    curl -u 'demo:redhat1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks
+    curl -u 'demo:redhat!1' -X GET http://localhost:8080/jboss-tasks-rs/tasks
 
 You will see a response with an empty collection:
 
@@ -227,7 +227,7 @@ JSON is not part of the JAX-RS standard but most JAX-RS implementations do suppo
 
 Now you can view task resources in JSON media type by specifying the correct Accept header. For example, using the cURL tool, type the following command:
 
-    curl -H "Accept: application/json" -u 'demo:redhat1!' -X GET http://localhost:8080/jboss-tasks-rs/tasks/1
+    curl -H "Accept: application/json" -u 'demo:redhat!1' -X GET http://localhost:8080/jboss-tasks-rs/tasks/1
 
 You will see the following response:
 
@@ -273,4 +273,3 @@ Debug the Application
 If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
 
         mvn dependency:sources
-
