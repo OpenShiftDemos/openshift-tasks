@@ -68,4 +68,10 @@ public class DemoResource {
         Runtime.getRuntime().exec("kill 1");
     }
 
+    @GET
+    @Path("healthcheck/")
+    @Produces({"application/json"})
+    public String checkHealth(@Context SecurityContext context) throws IOException {
+        return new String("1");
+    }
 }
