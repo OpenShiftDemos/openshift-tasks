@@ -102,15 +102,12 @@
             <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- JSON: uncomment to include json support (note json is not part of the JAX-RS standard) -->
-        <!--
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jackson-provider</artifactId>
             <version>2.3.1.GA</version>
             <scope>provided</scope>
         </dependency>
-        -->
 
         <!-- Import the EJB API, we use provided scope as the API is included in JBoss EAP 6 -->
         <dependency>

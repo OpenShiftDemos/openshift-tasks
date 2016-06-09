@@ -32,14 +32,14 @@ REST Endpoints on OpenShift
 * Get a task by id
 
   ```
-  curl -u 'redhat:redhat1!' -H "Accept: application/xml" -X GET http://tasks-dev.10.1.2.10.xip.io/tasks/1
+  curl -u 'redhat:redhat1!' -H "Accept: application/json" -X GET http://tasks-dev.10.1.2.10.xip.io/tasks/1
   ```
 
 * Get all user tasks
 
   ```
 
-  curl -u 'redhat:redhat1!' -H "Accept: application/xml" -X GET http://tasks-dev.10.1.2.10.xip.io/tasks
+  curl -u 'redhat:redhat1!' -H "Accept: application/json" -X GET http://tasks-dev.10.1.2.10.xip.io/tasks
   ```
 
 * Delete a task by id
