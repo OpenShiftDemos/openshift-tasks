@@ -31,7 +31,7 @@ public class DemoResource {
     @Produces({"application/json"})
     public String logInfo(@Context SecurityContext context, @PathParam("number") int number) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
-        log.log(Level.INFO, "OpenShift Information Log");
+        log.log(Level.INFO, "OpenShift: A message for INFO purposes");
         return new String("Added a log statement of type INFO");
     }
 
@@ -40,7 +40,7 @@ public class DemoResource {
     @Produces({"application/json"})
     public String logSevere(@Context SecurityContext context, @PathParam("number") int number) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
-        log.log(Level.SEVERE, "OpenShift Information Log");
+        log.log(Level.SEVERE, "OpenShift: This is an error message");
         return new String("Added a log statement of type SEVERE");
     }
 
@@ -49,7 +49,7 @@ public class DemoResource {
     @Produces({"application/json"})
     public String logWarning(@Context SecurityContext context, @PathParam("number") int number) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
-        log.log(Level.WARNING, "OpenShift Information Log");
+        log.log(Level.WARNING, "OpenShift: This is a warning message");
         return new String("Added a log statement of type WARNING");
     }
 
