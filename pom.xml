@@ -278,6 +278,7 @@
 			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
 			<build>
+				<finalName>${project.artifactId}</finalName>
 				<plugins>
 					<plugin>
 						<artifactId>maven-surefire-plugin</artifactId>
