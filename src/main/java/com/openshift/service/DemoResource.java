@@ -28,27 +28,27 @@ public class DemoResource {
     }
 
     @GET
-    @Path("log/info/{number}")
+    @Path("log/info")
     @Produces({"application/json"})
-    public String logInfo(@Context SecurityContext context, @PathParam("number") int number) {
+    public String logInfo(@Context SecurityContext context) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
         log.log(Level.INFO, "OpenShift: A message for INFO purposes");
         return new String("Added a log statement of type INFO");
     }
 
     @GET
-    @Path("log/error/{number}")
+    @Path("log/error/")
     @Produces({"application/json"})
-    public String logSevere(@Context SecurityContext context, @PathParam("number") int number) {
+    public String logSevere(@Context SecurityContext context) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
         log.log(Level.SEVERE, "OpenShift: This is an error message");
         return new String("Added a log statement of type SEVERE");
     }
 
     @GET
-    @Path("log/warning/{number}")
+    @Path("log/warning")
     @Produces({"application/json"})
-    public String logWarning(@Context SecurityContext context, @PathParam("number") int number) {
+    public String logWarning(@Context SecurityContext context) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
         log.log(Level.WARNING, "OpenShift: This is a warning message");
         return new String("Added a log statement of type WARNING");
