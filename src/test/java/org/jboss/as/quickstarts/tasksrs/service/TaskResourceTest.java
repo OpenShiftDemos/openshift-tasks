@@ -1,5 +1,6 @@
 package org.jboss.as.quickstarts.tasksrs.service;
 
+import static java.util.Arrays.asList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -9,6 +10,8 @@ import static org.mockito.Mockito.when;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriBuilder;
@@ -20,6 +23,7 @@ import org.jboss.as.quickstarts.tasksrs.model.TaskDao;
 import org.jboss.as.quickstarts.tasksrs.model.User;
 import org.jboss.as.quickstarts.tasksrs.model.UserDao;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -81,5 +85,37 @@ public class TaskResourceTest {
 		
 		verify(userDao).createUser(any(User.class));
 		verify(taskDao).createTask(any(User.class), any(Task.class));
+	}
+	
+
+	@Test
+	public void getTaskByIdWithNonExistingUser() {
+		when(taskDao.getAll(any(User.class))).thenReturn(asList(newTask(123L)));
+		
+		taskResource.getTaskById(securityContext, 123L);
+		
+		verify(userDao).getForUsername("sally");
+		verify(userDao).createUser(any(User.class));
+		verify(taskDao).getAll(any(User.class));
+	}
+
+
+	@Test
+	public void deleteTaskById() {
+		when(taskDao.getAll(any(User.class))).thenReturn(asList(newTask(123L)));
+		
+		taskResource.deleteTaskById(securityContext, 123L);
+		
+		verify(userDao).getForUsername("sally");
+		verify(userDao).createUser(any(User.class));
+		verify(taskDao).getAll(any(User.class));
+		verify(taskDao).deleteTask(any(Task.class));
+
+	}
+	
+	private Task newTask(Long id) {
+		Task task = new Task("Task 1");
+		task.setId(id);
+		return task;
 	}
 }
