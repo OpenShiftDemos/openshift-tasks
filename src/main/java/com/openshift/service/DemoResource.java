@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,12 +55,17 @@ public class DemoResource {
     }
 
     @GET
-    @Path("killswitch/")
+    @Path("killapp/")
     @Produces({"application/json"})
-    public String killSwitch(@Context SecurityContext context) {
+    public void killApp(@Context SecurityContext context) {
         System.exit(1);
-        return new String("Added a log statement of type WARNING");
     }
 
+    @GET
+    @Path("killswitch/")
+    @Produces({"application/json"})
+    public void killSwitch(@Context SecurityContext context) throws IOException {
+        Runtime.getRuntime().exec("kill 1");
+    }
 
 }
