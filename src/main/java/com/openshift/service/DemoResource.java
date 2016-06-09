@@ -56,7 +56,7 @@ public class DemoResource {
     @GET
     @Path("killswitch/")
     @Produces({"application/json"})
-    public String killSwitch(@Context SecurityContext context, @PathParam("number") int number) {
+    public String killSwitch(@Context SecurityContext context) {
         System.exit(1);
         return new String("Added a log statement of type WARNING");
     }
