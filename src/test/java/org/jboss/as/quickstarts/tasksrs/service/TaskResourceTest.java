@@ -10,8 +10,6 @@ import static org.mockito.Mockito.when;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.LinkedList;
 
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriBuilder;
@@ -23,7 +21,6 @@ import org.jboss.as.quickstarts.tasksrs.model.TaskDao;
 import org.jboss.as.quickstarts.tasksrs.model.User;
 import org.jboss.as.quickstarts.tasksrs.model.UserDao;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
