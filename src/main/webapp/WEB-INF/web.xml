@@ -22,7 +22,7 @@
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    
+
     <!-- Use HTTP Basic for authentication -->
     <login-config>
         <auth-method>BASIC</auth-method>
@@ -37,7 +37,7 @@
     <security-constraint>
       <web-resource-collection>
         <web-resource-name>Tasks</web-resource-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/tasks/*</url-pattern>
       </web-resource-collection>
       <auth-constraint>
         <role-name>guest</role-name>
