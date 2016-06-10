@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,39 +28,50 @@ public class DemoResource {
     }
 
     @GET
-    @Path("log/info/{number}")
+    @Path("log/info")
     @Produces({"application/json"})
-    public String logInfo(@Context SecurityContext context, @PathParam("number") int number) {
+    public String logInfo(@Context SecurityContext context) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
         log.log(Level.INFO, "OpenShift: A message for INFO purposes");
         return new String("Added a log statement of type INFO");
     }
 
     @GET
-    @Path("log/error/{number}")
+    @Path("log/error/")
     @Produces({"application/json"})
-    public String logSevere(@Context SecurityContext context, @PathParam("number") int number) {
+    public String logSevere(@Context SecurityContext context) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
         log.log(Level.SEVERE, "OpenShift: This is an error message");
         return new String("Added a log statement of type SEVERE");
     }
 
     @GET
-    @Path("log/warning/{number}")
+    @Path("log/warning")
     @Produces({"application/json"})
-    public String logWarning(@Context SecurityContext context, @PathParam("number") int number) {
+    public String logWarning(@Context SecurityContext context) {
         Logger log = Logger.getLogger(DemoResource.class.getName());
         log.log(Level.WARNING, "OpenShift: This is a warning message");
         return new String("Added a log statement of type WARNING");
     }
 
     @GET
-    @Path("killswitch/")
+    @Path("killapp/")
     @Produces({"application/json"})
-    public String killSwitch(@Context SecurityContext context) {
+    public void killApp(@Context SecurityContext context) {
         System.exit(1);
-        return new String("Added a log statement of type WARNING");
     }
 
+    @GET
+    @Path("killswitch/")
+    @Produces({"application/json"})
+    public void killSwitch(@Context SecurityContext context) throws IOException {
+        Runtime.getRuntime().exec("kill 1");
+    }
 
+    @GET
+    @Path("healthcheck/")
+    @Produces({"application/json"})
+    public String checkHealth(@Context SecurityContext context) throws IOException {
+        return new String("1");
+    }
 }
