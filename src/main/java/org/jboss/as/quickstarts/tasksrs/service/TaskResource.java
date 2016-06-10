@@ -55,7 +55,6 @@ public class TaskResource {
     @Path("tasks/{title}")
     public Response createTask(@Context UriInfo info, @Context SecurityContext context,
                                @PathParam("title")  @DefaultValue("task") String taskTitle) {
-
         User user = getUser(context);
         Task task = new Task(taskTitle);
 
@@ -100,7 +99,6 @@ public class TaskResource {
     public List<Task> getTasks(@Context SecurityContext context) {
         return getTasks(getUser(context));
     }
-
 
     // Utility Methods
 

@@ -39,6 +39,11 @@
         <web-resource-name>Tasks</web-resource-name>
         <url-pattern>/tasks/*</url-pattern>
       </web-resource-collection>
+      <web-resource-collection>
+        <web-resource-name>Users</web-resource-name>
+        <url-pattern>/users/*</url-pattern>
+      </web-resource-collection>
+
       <auth-constraint>
         <role-name>guest</role-name>
       </auth-constraint>
