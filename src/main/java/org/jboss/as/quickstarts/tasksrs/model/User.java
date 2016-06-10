@@ -28,6 +28,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * User entity
@@ -36,6 +41,7 @@ import javax.persistence.OneToMany;
  */
 @SuppressWarnings("serial")
 @Entity
+@XmlRootElement(name = "user")
 public class User implements Serializable {
 
     @Id
@@ -56,6 +62,7 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -64,6 +71,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    @XmlAttribute
     public String getUsername() {
         return username;
     }
@@ -72,6 +80,8 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    @XmlTransient
+    @JsonIgnore
     public List<Task> getTasks() {
         return tasks;
     }

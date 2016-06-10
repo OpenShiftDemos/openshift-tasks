@@ -16,6 +16,8 @@
  */
 package org.jboss.as.quickstarts.tasksrs.model;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 /**
@@ -30,4 +32,6 @@ public interface UserDao {
     public User getForUsername(String username);
 
     public void createUser(User user);
+    
+    public List<User> getAll();
 }

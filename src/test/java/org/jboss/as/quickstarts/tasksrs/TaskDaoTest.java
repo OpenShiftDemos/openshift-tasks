@@ -28,10 +28,12 @@ import javax.persistence.EntityManager;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+import org.jboss.as.quickstarts.tasksrs.category.IntegrationTest;
 import org.jboss.as.quickstarts.tasksrs.model.*;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
 /**
@@ -39,6 +41,7 @@ import org.junit.runner.RunWith;
  * @author Oliver Kiss
  */
 @RunWith(Arquillian.class)
+@Category(IntegrationTest.class)
 public class TaskDaoTest {
 
     @Deployment

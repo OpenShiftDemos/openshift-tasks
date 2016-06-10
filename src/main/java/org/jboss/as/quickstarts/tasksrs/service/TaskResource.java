@@ -55,7 +55,6 @@ public class TaskResource {
     @Path("tasks/{title}")
     public Response createTask(@Context UriInfo info, @Context SecurityContext context,
                                @PathParam("title")  @DefaultValue("task") String taskTitle) {
-
         User user = getUser(context);
         Task task = new Task(taskTitle);
 
@@ -80,9 +79,7 @@ public class TaskResource {
 
     @GET
     @Path("tasks/{id}")
-    // JSON: include "application/json" in the @Produces annotation to include json support
-    //@Produces({ "application/xml", "application/json" })
-    @Produces({ "application/xml" })
+    @Produces({ "application/xml", "application/json" })
     public Task getTaskById(@Context SecurityContext context, @PathParam("id") Long id) {
         User user = getUser(context);
 
@@ -91,22 +88,17 @@ public class TaskResource {
 
     @GET
     @Path("tasks/{title}")
-    // JSON: include "application/json" in the @Produces annotation to include json support
-    //@Produces({ "application/xml", "application/json" })
-    @Produces({ "application/xml" })
+    @Produces({ "application/xml", "application/json" })
     public List<Task> getTasksByTitle(@Context SecurityContext context, @PathParam("title") String title) {
         return getTasks(getUser(context), title);
     }
 
     @GET
     @Path("tasks")
-    // JSON: include "application/json" in the @Produces annotation to include json support
-    //@Produces({ "application/xml", "application/json" })
-    @Produces({ "application/xml" })
+    @Produces({ "application/xml", "application/json" })
     public List<Task> getTasks(@Context SecurityContext context) {
         return getTasks(getUser(context));
     }
-
 
     // Utility Methods
 
