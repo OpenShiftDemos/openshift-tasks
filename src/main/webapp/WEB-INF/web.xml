@@ -38,11 +38,11 @@
     <security-constraint>
       <web-resource-collection>
         <web-resource-name>Tasks</web-resource-name>
-        <url-pattern>/tasks/*</url-pattern>
+        <url-pattern>/ws/tasks/*</url-pattern>
       </web-resource-collection>
       <web-resource-collection>
         <web-resource-name>Users</web-resource-name>
-        <url-pattern>/users/*</url-pattern>
+        <url-pattern>/ws/users/*</url-pattern>
       </web-resource-collection>
 
       <auth-constraint>
