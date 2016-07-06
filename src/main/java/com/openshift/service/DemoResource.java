@@ -31,6 +31,8 @@ public class DemoResource {
         Load cpuLoad = new Load();
         cpuLoad.generateLoad(seconds * 1000);
         String response = new String("Load being generated for " + seconds + " seconds.");
+        Logger log = Logger.getLogger(DemoResource.class.getName());
+        log.log(Level.INFO, "INFO: Requested to generate load for " + seconds + " seconds.");
         return "{\"response\":\"" + response + "\"}";
     }
 
