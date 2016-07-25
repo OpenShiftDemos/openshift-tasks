@@ -53,4 +53,6 @@
     <security-role>
       <role-name>guest</role-name>
     </security-role>
+
+    <distributable/>
 </web-app>

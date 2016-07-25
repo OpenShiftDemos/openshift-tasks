@@ -131,7 +131,7 @@
           <div class="card-pf">
             <div class="card-pf-heading">
               <h2 class="card-pf-title">
-                Pod Info
+                Info
               </h2>
             </div>
             <div class="card-pf-body">
@@ -145,10 +145,14 @@
                     <td>Pod IP</td>
                     <td><%= System.getenv("MY_POD_IP") %></td>
                   </tr>
-                  <tr role="row" class="even">
+                  <tr role="row" class="odd">
                     <td>Used Memory</td>
                     <% int mb = 1024*1024; %>
-                    <td><%= (Runtime.getRuntime().totalMemory()) / mb %></td>
+                    <td><%= (Runtime.getRuntime().totalMemory()) / mb %> MB</td>
+                  </tr>
+                  <tr role="row" class="even">
+                    <td>Session ID</td>
+                    <td><%= session.getId() %></td>
                   </tr>
                 </table>
               </div>
@@ -185,7 +189,7 @@
       });
       setTimeout(doPoll,5000);
     }
-    
+
     $(function() {
       // matchHeight the contents of each .card-pf and then the .card-pf itself
       $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
@@ -199,7 +203,7 @@
     $(document).ready(function() {
       // start polling
       doPoll();
-            
+
       // info button
       $("#loginfo").click(function(e) {
         e.preventDefault();
@@ -261,7 +265,7 @@
           console.log(arguments);
           $("#messages .message-container p").html("Clicking the button did not work.");
         });
-      }); 
+      });
       // kill button
       $("#kill").click(function(e) {
         e.preventDefault();
