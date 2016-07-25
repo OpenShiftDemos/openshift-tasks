@@ -1,4 +1,4 @@
-tasks-rs: JAX-RS, JPA quickstart
+OpenShift Tasks: JAX-RS, JPA quickstart
 ==============================
 Author: Mike Musgrove  
 Level: Intermediate  
@@ -26,26 +26,26 @@ REST Endpoints on OpenShift
 * Create task
 
   ```
-  curl -i -u 'redhat:redhat1!' -H "Content-Length: 0" -X POST http://tasks-dev.10.1.2.10.xip.io/tasks/task1
+  curl -i -u 'redhat:redhat1!' -H "Content-Length: 0" -X POST http://tasks-dev.10.1.2.10.xip.io/ws/tasks/task1
   ```
 
 * Get a task by id
 
   ```
-  curl -u 'redhat:redhat1!' -H "Accept: application/json" -X GET http://tasks-dev.10.1.2.10.xip.io/tasks/1
+  curl -u 'redhat:redhat1!' -H "Accept: application/json" -X GET http://tasks-dev.10.1.2.10.xip.io/ws/tasks/1
   ```
 
 * Get all user tasks
 
   ```
 
-  curl -u 'redhat:redhat1!' -H "Accept: application/json" -X GET http://tasks-dev.10.1.2.10.xip.io/tasks
+  curl -u 'redhat:redhat1!' -H "Accept: application/json" -X GET http://tasks-dev.10.1.2.10.xip.io/ws/tasks
   ```
 
 * Delete a task by id
 
   ```
-  curl -i -u 'redhat:redhat1!' -X DELETE http://tasks-dev.10.1.2.10.xip.io/tasks/1
+  curl -i -u 'redhat:redhat1!' -X DELETE http://tasks-dev.10.1.2.10.xip.io/ws/tasks/1
   ```
 
 * Generate CPU load. Last parameter is duration of load in seconds
