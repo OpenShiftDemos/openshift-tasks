@@ -1,85 +1,113 @@
 apiVersion: v1
 kind: Template
+labels:
+  template: openshift-tasks
 metadata:
   name: openshift-tasks
 objects:
 - apiVersion: v1
   kind: ImageStream
   metadata:
+    labels:
+      application: ${APPLICATION_NAME}
     name: ${APPLICATION_NAME}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      description: The web server's http port.
+    labels:
+      application: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
+  spec:
+    ports:
+    - port: 8080
+      targetPort: 8080
+    selector:
+      deploymentConfig: ${APPLICATION_NAME}
+- apiVersion: v1
+  id: ${APPLICATION_NAME}-http
+  kind: Route
+  metadata:
+    annotations:
+      description: Route for application's http service.
+    labels:
+      application: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
+  spec:
+    to:
+      name: ${APPLICATION_NAME}
 - apiVersion: v1
   kind: BuildConfig
   metadata:
     labels:
-      app: ${APPLICATION_NAME}
+      application: ${APPLICATION_NAME}
     name: ${APPLICATION_NAME}
   spec:
     output:
       to:
         kind: ImageStreamTag
         name: ${APPLICATION_NAME}:latest
-    postCommit: {}
-    resources: {}
     source:
       git:
-        ref: ${SOURCE_REFERENCE}
+        ref: ${SOURCE_REF}
         uri: ${SOURCE_URL}
-      secrets: null
       type: Git
     strategy:
       sourceStrategy:
+        forcePull: true
         from:
           kind: ImageStreamTag
           name: jboss-eap64-openshift:1.3
           namespace: openshift
-        incremental: false
       type: Source
     triggers:
-    - generic:
-        secret: ${GENERIC_WEBHOOK_SECRET}
-      type: Generic
     - github:
-        secret: ${GITHUB_WEBHOOK_SECRET}
+        secret: kJZLvfQr3hZg
       type: GitHub
+    - generic:
+        secret: kJZLvfQr3hZg
+      type: Generic
     - imageChange: {}
       type: ImageChange
     - type: ConfigChange
-  status:
-    lastVersion: 0
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     labels:
-      app: ${APPLICATION_NAME}
+      application: ${APPLICATION_NAME}
     name: ${APPLICATION_NAME}
   spec:
     replicas: 1
     selector:
-      deploymentconfig: tasks
+      deploymentConfig: ${APPLICATION_NAME}
     strategy:
-      resources: {}
-      rollingParams:
-        intervalSeconds: 1
-        maxSurge: 25%
-        maxUnavailable: 25%
-        timeoutSeconds: 600
-        updatePeriodSeconds: 1
-      type: Rolling
+      type: Recreate
     template:
       metadata:
         labels:
-          app: ${APPLICATION_NAME}
-          deploymentconfig: ${APPLICATION_NAME}
+          application: ${APPLICATION_NAME}
+          deploymentConfig: ${APPLICATION_NAME}
+        name: ${APPLICATION_NAME}
       spec:
         containers:
-        - name: ${APPLICATION_NAME}
-          env:
+        - env:
           - name: MY_POD_IP
             valueFrom:
               fieldRef:
                 apiVersion: v1
                 fieldPath: status.podIP
-          image: " "
+          - name: OPENSHIFT_KUBE_PING_LABELS
+            value: application=${APPLICATION_NAME}
+          - name: OPENSHIFT_KUBE_PING_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: HORNETQ_CLUSTER_PASSWORD
+            value: kJZLvfQr3hZg
+          - name: JGROUPS_CLUSTER_PASSWORD
+            value: kJZLvfQr3hZg
+          image: ${APPLICATION_NAME}
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
@@ -91,13 +119,16 @@ objects:
             periodSeconds: 45
             successThreshold: 1
             timeoutSeconds: 1
-          name: tasks
+          name: ${APPLICATION_NAME}
           ports:
-          - containerPort: 8080
-            protocol: TCP
-          - containerPort: 8443
-            protocol: TCP
           - containerPort: 8778
+            name: jolokia
+            protocol: TCP
+          - containerPort: 8080
+            name: http
+            protocol: TCP
+          - containerPort: 8888
+            name: ping
             protocol: TCP
           readinessProbe:
             failureThreshold: 3
@@ -105,88 +136,26 @@ objects:
               path: /ws/demo/healthcheck
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 20
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-        dnsPolicy: ClusterFirst
-        restartPolicy: Always
-        securityContext: {}
-        terminationGracePeriodSeconds: 30
-    test: false
+        terminationGracePeriodSeconds: 60
     triggers:
     - imageChangeParams:
         automatic: true
         containerNames:
         - ${APPLICATION_NAME}
         from:
-          kind: ImageStreamTag
-          name: ${APPLICATION_NAME}:latest
+          kind: ImageStream
+          name: ${APPLICATION_NAME}
       type: ImageChange
     - type: ConfigChange
-  status: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}
-  spec:
-    ports:
-    - name: 8080-tcp
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
-    - name: 8443-tcp
-      port: 8443
-      protocol: TCP
-      targetPort: 8443
-    - name: 8778-tcp
-      port: 8778
-      protocol: TCP
-      targetPort: 8778
-    selector:
-      deploymentconfig: ${APPLICATION_NAME}
-    sessionAffinity: None
-    type: ClusterIP
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Route
-  metadata:
-    labels:
-      app: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}
-  spec:
-    host: ""
-    port:
-      targetPort: 8080-tcp
-    to:
-      kind: Service
-      name: ${APPLICATION_NAME}
 parameters:
-- description: The name of the application and the prefix for its artifacts
-  displayName: Application Name
+- description: The name for the application.
   name: APPLICATION_NAME
+  required: true
   value: tasks
-- description: The URL of the source code repository
-  displayName: Source URL
+- description: Git source URI for application
   name: SOURCE_URL
+  required: true
   value: https://github.com/openshiftdemos/openshift-tasks
-- description: The branch or tag of the source code to use
-  displayName: Source Reference
-  name: SOURCE_REFERENCE
+- description: Git branch/tag reference
+  name: SOURCE_REF
   value: master
-- description: A secret string used to configure the GitHub webhook.
-  displayName: GitHub Webhook Secret
-  from: '[a-zA-Z0-9]{40}'
-  generate: expression
-  name: GITHUB_WEBHOOK_SECRET
-- description: A secret string used to configure the generic webhook.
-  displayName: Generic Webhook Secret
-  from: '[a-zA-Z0-9]{40}'
-  generate: expression
-  name: GENERIC_WEBHOOK_SECRET
- 
