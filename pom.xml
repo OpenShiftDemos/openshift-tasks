@@ -52,6 +52,13 @@
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>openshift-repository</id>
+            <url>https://mirror.openshift.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
     <distributionManagement>
       <repository>
          <id>nexus</id>
