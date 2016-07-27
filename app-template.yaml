@@ -82,7 +82,14 @@ objects:
     selector:
       deploymentConfig: ${APPLICATION_NAME}
     strategy:
-      type: Recreate
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
     template:
       metadata:
         labels:
@@ -136,6 +143,10 @@ objects:
               path: /ws/demo/healthcheck
               port: 8080
               scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
         terminationGracePeriodSeconds: 60
     triggers:
     - imageChangeParams:
