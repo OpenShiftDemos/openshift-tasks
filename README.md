@@ -1,16 +1,10 @@
-OpenShift Tasks: JAX-RS, JPA quickstart
+OpenShift Tasks: JAX-RS, JPA quickstart 
 ==============================
-Author: Mike Musgrove  
-Level: Intermediate  
-Technologies: JPA, JAX-RS  
-Summary: The `tasks-rs` quickstart demonstrates how to implement a JAX-RS service that uses JPA 2.0 persistence.  
-Prerequisites: tasks  
-Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+[![CircleCI](https://circleci.com/gh/OpenShiftDemos/openshift-tasks.svg?&style=shield&circle-token=1462d2d99334a912b32f758616eb39f6390a200b)](https://circleci.com/gh/OpenShiftDemos/openshift-tasks)
 
 What is it?
 -----------
-
+a
 The `tasks-rs` quickstart demonstrates how to implement a JAX-RS service that uses JPA 2.0 persistence deployed to Red Hat JBoss Enterprise Application Platform.
 
 The application manages User and Task JPA entities. A user represents an authenticated principal and is associated with zero or more Tasks. Service methods validate that there is an authenticated principal and the first time a principal is seen, a JPA User entity is created to correspond to the principal. JAX-RS annotated methods are provided for associating Tasks with this User and for listing and removing Tasks.
