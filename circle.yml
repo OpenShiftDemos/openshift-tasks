@@ -1,0 +1,7 @@
+machine:
+  java:
+    version: openjdk8
+
+branches:
+  only:
+    - master
