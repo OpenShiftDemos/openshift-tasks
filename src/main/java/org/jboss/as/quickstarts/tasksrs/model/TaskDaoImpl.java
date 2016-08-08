@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2014, Red Hat, Inc. and/or its affiliates, and individual
+ * Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
  * contributors by the @authors tag. See the copyright.txt in the
  * distribution for a full listing of individual contributors.
  *
@@ -64,7 +64,7 @@ public class TaskDaoImpl implements TaskDao {
     public List<Task> getForTitle(User user, String title) {
         String lowerCaseTitle = "%" + title.toLowerCase() + "%";
         return em.createQuery("SELECT t FROM Task t WHERE t.owner = ?1 AND LOWER(t.title) LIKE ?2", Task.class)
-                .setParameter(1, user).setParameter(2, lowerCaseTitle).getResultList();
+            .setParameter(1, user).setParameter(2, lowerCaseTitle).getResultList();
     }
 
     @Override

@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2014, Red Hat, Inc. and/or its affiliates, and individual
+ * Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
  * contributors by the @authors tag. See the copyright.txt in the
  * distribution for a full listing of individual contributors.
  *
@@ -54,7 +54,8 @@ public class TaskResource {
     @POST
     @Path("tasks/{title}")
     public Response createTask(@Context UriInfo info, @Context SecurityContext context,
-                               @PathParam("title")  @DefaultValue("task") String taskTitle) {
+        @PathParam("title") @DefaultValue("task") String taskTitle) {
+
         User user = getUser(context);
         Task task = new Task(taskTitle);
 
