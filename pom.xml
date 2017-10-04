@@ -70,6 +70,7 @@
        </snapshotRepository>
     </distributionManagement>
 
+<<<<<<< HEAD
     <dependencyManagement>
         <dependencies>
             <!-- JBoss distributes a complete set of Java EE 6 APIs including a Bill
@@ -87,6 +88,26 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+=======
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.bom</groupId>
+				<artifactId>jboss-eap-javaee7</artifactId>
+				<version>${version.jboss.bom.eap}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.bom</groupId>
+				<artifactId>jboss-eap-javaee7-with-tools</artifactId>
+				<version>${version.jboss.bom.eap}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+>>>>>>> 06af277... added site report
 
     <dependencies>
         <!-- Import the CDI API, we use provided scope as the API is included in JBoss EAP 6 -->
@@ -211,20 +232,105 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <!-- The default profile skips all tests, though you can tune it
-                to run just unit tests based on a custom pattern -->
-            <!-- Seperate profiles are provided for running all tests, including
-                Arquillian tests that execute in the specified container -->
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
+  <reporting>
+      <plugins>
+		      <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-javadoc-plugin</artifactId>
+		        <version>2.9</version>
+		        <reportSets>
+		          <reportSet>
+		            <reports>
+		              <report>javadoc</report>
+		            </reports>
+		          </reportSet>
+		        </reportSets>
+		      </plugin>
+		      <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-pmd-plugin</artifactId>
+		        <version>3.8</version>
+		      </plugin>
+          <plugin>
+              <groupId>org.owasp</groupId>
+              <artifactId>dependency-check-maven</artifactId>
+              <version>2.1.1</version>
+              <configuration>
+                  <skipProvidedScope>true</skipProvidedScope>
+                  <skipRuntimeScope>true</skipRuntimeScope>
+              </configuration>
+              <reportSets>
+                  <reportSet>
+                      <reports>
+                          <report>aggregate</report>
+                      </reports>
+                  </reportSet>
+              </reportSets>
+          </plugin>
+		      <plugin>
+		        <groupId>org.jacoco</groupId>
+		        <artifactId>jacoco-maven-plugin</artifactId>
+		        <version>0.7.9</version>
+		        <reportSets>
+		          <reportSet>
+		            <reports>
+		              <report>report</report>
+		            </reports>
+		          </reportSet>
+		        </reportSets>
+		      </plugin>
+	        <plugin>
+	          <groupId>org.apache.maven.plugins</groupId>
+	          <artifactId>maven-checkstyle-plugin</artifactId>
+	          <version>2.17</version>
+	          <reportSets>
+	            <reportSet>
+	              <reports>
+	                <report>checkstyle</report>
+	              </reports>
+	            </reportSet>
+	          </reportSets>
+	        </plugin>
+		      <plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>findbugs-maven-plugin</artifactId>
+		        <version>3.0.5</version>
+		      </plugin>
+		      <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-surefire-report-plugin</artifactId>
+		        <version>2.20.1</version>
+		      </plugin>
+		      <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-project-info-reports-plugin</artifactId>
+		        <version>2.6</version>
+		        <reportSets>
+		          <reportSet>
+		            <reports>
+		              <report>summary</report>
+		              <report>dependency-management</report>
+		            </reports>
+		          </reportSet>
+		        </reportSets>
+		      </plugin>
+      </plugins>
+  </reporting>
+
+	<profiles>
+		<profile>
+			<!-- The default profile skips all tests, though you can tune it to run 
+				just unit tests based on a custom pattern -->
+			<!-- Separate profiles are provided for running all tests, including Arquillian 
+				tests that execute in the specified container -->
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
 						<configuration>
 							<groups>org.jboss.as.quickstarts.tasksrs.category.UnitTest</groups>
 						</configuration>
