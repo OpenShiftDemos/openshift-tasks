@@ -9,10 +9,11 @@
 	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>org.jboss.quickstarts.eap</groupId>
 	<artifactId>jboss-tasks-rs</artifactId>
 	<version>7.0.0-SNAPSHOT</version>
@@ -25,30 +26,24 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
 		</license>
 	</licenses>
-
 	<properties>
 		<!-- Explicitly declaring the source encoding eliminates the following 
 			message: -->
 		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
 		<!-- JBoss dependency versions -->
 		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
-
 		<!-- Define the version of the JBoss BOMs we want to import to specify 
 			tested stacks. -->
 		<version.jboss.bom.eap>7.0.1.GA</version.jboss.bom.eap>
-
 		<!-- other plugin versions -->
 		<version.surefire.plugin>2.19.1</version.surefire.plugin>
 		<version.war.plugin>2.1.1</version.war.plugin>
-
 		<!-- maven-compiler-plugin -->
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
-
 	<repositories>
 		<repository>
 			<id>jboss-enterprise-maven-repository</id>
@@ -61,7 +56,6 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
 	<pluginRepositories>
 		<pluginRepository>
 			<id>jboss-enterprise-maven-repository</id>
@@ -74,7 +68,6 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>
@@ -85,7 +78,6 @@
 			<url>http://nexus:8081/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -104,7 +96,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 	<dependencies>
 		<!-- Import the CDI API, we use provided scope as the API is included in 
 			JBoss EAP -->
@@ -113,7 +104,6 @@
 			<artifactId>cdi-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- Import the JPA API, we use provided scope as the API is included in 
 			JBoss EAP -->
 		<dependency>
@@ -121,7 +111,6 @@
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- Import the JAX-RS API, we use provided scope as the API is included 
 			in JBoss EAP -->
 		<dependency>
@@ -134,7 +123,6 @@
 			<artifactId>resteasy-jackson2-provider</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- Import the EJB API, we use provided scope as the API is included in 
 			JBoss EAP -->
 		<dependency>
@@ -142,40 +130,34 @@
 			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
 			<artifactId>arquillian-junit-container</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.arquillian.protocol</groupId>
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>2.0.54-beta</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-multipart-provider</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<!-- Maven will append the version to the finalName (which is the name 
 			given to the generated war, and hence the context root) -->
@@ -229,98 +211,94 @@
 			</plugin>
 		</plugins>
 	</build>
-
-  <reporting>
-      <plugins>
-		      <plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-javadoc-plugin</artifactId>
-		        <version>2.9</version>
-		        <reportSets>
-		          <reportSet>
-		            <reports>
-		              <report>javadoc</report>
-		            </reports>
-		          </reportSet>
-		        </reportSets>
-		      </plugin>
-		      <plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-pmd-plugin</artifactId>
-		        <version>3.8</version>
-		      </plugin>
-<!--           <plugin>
-              <groupId>org.owasp</groupId>
-              <artifactId>dependency-check-maven</artifactId>
-              <version>2.1.1</version>
-              <configuration>
-                  <skipProvidedScope>true</skipProvidedScope>
-                  <skipRuntimeScope>true</skipRuntimeScope>
-              </configuration>
-              <reportSets>
-                  <reportSet>
-                      <reports>
-                          <report>aggregate</report>
-                      </reports>
-                  </reportSet>
-              </reportSets>
-          </plugin> -->
-		      <plugin>
-		        <groupId>org.jacoco</groupId>
-		        <artifactId>jacoco-maven-plugin</artifactId>
-		        <version>0.7.9</version>
-		        <reportSets>
-		          <reportSet>
-		            <reports>
-		              <report>report</report>
-		            </reports>
-		          </reportSet>
-		        </reportSets>
-		      </plugin>
-	        <plugin>
-	          <groupId>org.apache.maven.plugins</groupId>
-	          <artifactId>maven-checkstyle-plugin</artifactId>
-	          <version>2.17</version>
-	          <reportSets>
-	            <reportSet>
-	              <reports>
-	                <report>checkstyle</report>
-	              </reports>
-	            </reportSet>
-	          </reportSets>
-	        </plugin>
-		      <plugin>
-		        <groupId>org.codehaus.mojo</groupId>
-		        <artifactId>findbugs-maven-plugin</artifactId>
-		        <version>3.0.5</version>
-		      </plugin>
-		      <plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-surefire-report-plugin</artifactId>
-		        <version>2.20.1</version>
-		      </plugin>
-		      <plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-project-info-reports-plugin</artifactId>
-		        <version>2.6</version>
-		        <reportSets>
-		          <reportSet>
-		            <reports>
-		              <report>summary</report>
-		              <report>dependency-management</report>
-		            </reports>
-		          </reportSet>
-		        </reportSets>
-		      </plugin>
-      </plugins>
-  </reporting>
-
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.8</version>
+			</plugin>
+			<!-- 
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<skipProvidedScope>true</skipProvidedScope>
+					<skipRuntimeScope>true</skipRuntimeScope>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin> 
+			-->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.5</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.20.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.6</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>summary</report>
+							<report>dependency-management</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
 	<profiles>
 		<profile>
-			<!-- The default profile skips all tests, though you can tune it to run 
-				just unit tests based on a custom pattern -->
-			<!-- Separate profiles are provided for running all tests, including Arquillian 
-				tests that execute in the specified container -->
 			<id>default</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -336,57 +314,22 @@
 				</plugins>
 			</build>
 		</profile>
-
 		<profile>
-			<id>int-tests</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<groups>org.jboss.as.quickstarts.tasksrs.category.IntegrationTest</groups>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
+			<id>nexus3</id>
+			<distributionManagement>
+				<repository>
+					<id>nexus3</id>
+					<name>Releases</name>
+					<url>http://nexus:8081/repository/maven-releases</url>
+				</repository>
+				<snapshotRepository>
+					<id>nexus3</id>
+					<name>Snapshot</name>
+					<url>http://nexus:8081/repository/maven-snapshots</url>
+				</snapshotRepository>
+			</distributionManagement>
 		</profile>
 		<profile>
-			<!-- An optional Arquillian testing profile that executes tests in your 
-				JBoss EAP instance -->
-			<!-- This profile will start a new JBoss EAP instance, and execute the 
-				test, shutting it down when done -->
-			<!-- Run with: mvn clean test -Parq-wildfly-managed -->
-			<id>arq-wildfly-managed</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.wildfly.arquillian</groupId>
-					<artifactId>wildfly-arquillian-container-managed</artifactId>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-
-		<profile>
-			<!-- An optional Arquillian testing profile that executes tests in a remote 
-				JBoss EAP instance -->
-			<!-- Run with: mvn clean test -Parq-wildfly-remote -->
-			<id>arq-wildfly-remote</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.wildfly.arquillian</groupId>
-					<artifactId>wildfly-arquillian-container-remote</artifactId>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<!-- When built in OpenShift the 'openshift' profile will be used when 
-				invoking mvn. -->
-			<!-- Use this profile for any OpenShift specific customization your app 
-				will need. -->
-			<!-- By default that is to put the resulting archive into the 'deployments' 
-				folder. -->
-			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
 			<build>
 				<plugins>
