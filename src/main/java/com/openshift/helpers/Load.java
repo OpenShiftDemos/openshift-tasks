@@ -20,7 +20,7 @@ public class Load {
             this.duration = duration;
         }
 
-        
+
         @Override
         public void run() {
             long startTime = System.currentTimeMillis();

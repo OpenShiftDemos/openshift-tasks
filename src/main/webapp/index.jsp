@@ -181,10 +181,10 @@
     //poll the healthcheck endpoint and update the button color appropriately
     function doPoll(){
       $.get("/ws/demo/healthcheck", function(result) {
-	    $("#healthstatus").html("HEALTHY");
+        $("#healthstatus").html("HEALTHY");
         $("#healthstatus").addClass("progress-bar-success").removeClass("progress-bar-danger");
       }).fail(function() {
-  		$("#healthstatus").html("UNHEALTHY");
+          $("#healthstatus").html("UNHEALTHY");
         $("#healthstatus").addClass("progress-bar-danger").removeClass("progress-bar-success");
       });
       setTimeout(doPoll,5000);
