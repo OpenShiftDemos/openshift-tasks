@@ -44,9 +44,9 @@ public class UserDaoImpl implements UserDao {
         }
         return result.get(0);
     }
-    
+
     public List<User> getAll() {
-    	return em.createQuery("select u from User u", User.class).getResultList();
+        return em.createQuery("select u from User u", User.class).getResultList();
     }
 
     public void createUser(User user) {

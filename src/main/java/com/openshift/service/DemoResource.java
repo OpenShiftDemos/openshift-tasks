@@ -19,10 +19,10 @@ import java.util.logging.Logger;
  */
 @Path("demo")
 public class DemoResource {
-	
-	// application instance health
-	// 1 is healthy
-	private static Integer health = 1;
+
+    // application instance health
+    // 1 is healthy
+    private static Integer health = 1;
 
     @GET
     @Path("load/{seconds}")
@@ -68,44 +68,44 @@ public class DemoResource {
     @Path("togglehealth/")
     @Produces({"application/json"})
     public String togglehealth(@Context SecurityContext context) {
-    	// check if currently healthy, otherwise "become" healthy
-    	if (health == 1) {
-    		// become unhealthy
-    		health = 0;
-    		Logger log = Logger.getLogger(DemoResource.class.getName());
+        // check if currently healthy, otherwise "become" healthy
+        if (health == 1) {
+            // become unhealthy
+            health = 0;
+            Logger log = Logger.getLogger(DemoResource.class.getName());
             log.log(Level.SEVERE, "ERROR: I'm not feeling so well.");
-            return new String("{\"response\":\"The app is starting to look a little ill...\"}");	
-    	} else {
-    		// become healthy
-    		health = 1;
-    		Logger log = Logger.getLogger(DemoResource.class.getName());
+            return new String("{\"response\":\"The app is starting to look a little ill...\"}");
+        } else {
+            // become healthy
+            health = 1;
+            Logger log = Logger.getLogger(DemoResource.class.getName());
             log.log(Level.INFO, "INFO: I feel much better.");
             return new String("{\"response\":\"The app is starting to look great!\"}");
-    	}
+        }
     }
 
     @GET
     @Path("killswitch/")
     @Produces({"application/json"})
     public void killSwitch(@Context SecurityContext context) throws IOException {
-    	Logger log = Logger.getLogger(DemoResource.class.getName());
+        Logger log = Logger.getLogger(DemoResource.class.getName());
         log.log(Level.SEVERE, "ERROR: Going down NOW!");
-        Runtime.getRuntime().halt(255);       
-	}
+        Runtime.getRuntime().halt(255);
+    }
 
     @GET
     @Path("healthcheck/")
     @Produces({"application/json"})
     public Response checkHealth(@Context SecurityContext context) throws IOException {
-    	
-    	String response = new String("{\"response\":\"Health Status: " + health + "\", \"health\": " + health + "}");
 
-    	// if health is 1, return 200, otherwise 500
-    	if (health == 1) {
-    		return Response.status(Response.Status.OK).entity(response).build();
-    	} else {
-    		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
-    	}
-    	
+        String response = new String("{\"response\":\"Health Status: " + health + "\", \"health\": " + health + "}");
+
+        // if health is 1, return 200, otherwise 500
+        if (health == 1) {
+            return Response.status(Response.Status.OK).entity(response).build();
+        } else {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+        }
+
     }
 }
