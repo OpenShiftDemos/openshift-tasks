@@ -55,11 +55,16 @@ objects:
       type: Git
     strategy:
       sourceStrategy:
+        env:
+        - name: MAVEN_MIRROR_URL
+          value: ${MAVEN_MIRROR_URL}
+        - name: ARTIFACT_DIR
+          value: ${ARTIFACT_DIR}
         forcePull: true
         from:
           kind: ImageStreamTag
-          name: jboss-eap64-openshift:latest
-          namespace: openshift
+          name: ${IMAGE_NAME}:${IMAGE_TAG}
+          namespace: ${IMAGE_STREAM_NAMESPACE}
       type: Source
     triggers:
     - github:
@@ -147,10 +152,14 @@ objects:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 100m
         terminationGracePeriodSeconds: 60
     triggers:
     - imageChangeParams:
-        automatic: true
         containerNames:
         - ${APPLICATION_NAME}
         from:
@@ -163,10 +172,32 @@ parameters:
   name: APPLICATION_NAME
   required: true
   value: tasks
+- description: The name for the container image
+  name: IMAGE_NAME
+  required: true
+  value: jboss-eap64-openshift
+- description: The tag for the image
+  name: IMAGE_TAG
+  required: true
+  value: "1.6"
+- description: Namespace in which the ImageStreams for Red Hat Middleware images are
+    installed. These ImageStreams are normally installed in the openshift namespace.
+    You should only need to modify this if you've installed the ImageStreams in a
+    different namespace/project.
+  displayName: ImageStream Namespace
+  name: IMAGE_STREAM_NAMESPACE
+  required: true
+  value: openshift
 - description: Git source URI for application
   name: SOURCE_URL
   required: true
-  value: https://github.com/openshiftdemos/openshift-tasks
+  value: https://github.com/hashnao/openshift-tasks
 - description: Git branch/tag reference
   name: SOURCE_REF
   value: master
+- description: Maven mirror to use for S2I builds
+  displayName: Maven mirror URL
+  name: MAVEN_MIRROR_URL
+- description: List of directories from which archives will be copied into the deployment
+    folder. If unspecified, all archives in /target will be copied.
+  name: ARTIFACT_DIR
