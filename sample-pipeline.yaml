@@ -17,7 +17,7 @@ spec:
             agent {
               node {
                 // spin up a tasks slave pod to run this build on
-                label 'tasks'
+                label 'maven'
               }
             }
             options {
