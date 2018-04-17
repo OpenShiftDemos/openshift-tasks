@@ -166,7 +166,7 @@ parameters:
 - description: Git source URI for application
   name: SOURCE_URL
   required: true
-  value: https://github.com/openshiftdemos/openshift-tasks
+  value: https://github.com/Johnny2136/openshift-tasks
 - description: Git branch/tag reference
   name: SOURCE_REF
   value: master
