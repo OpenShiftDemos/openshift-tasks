@@ -33,6 +33,8 @@ public class Load {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                 // Restore interrupted state...
+                Thread.currentThread().interrupt();
             }
         }
     }
