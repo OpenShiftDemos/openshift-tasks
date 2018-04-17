@@ -32,6 +32,7 @@ public class Load {
                     }
                 }
             } catch (InterruptedException e) {
+                LOGGER.log("context", e);
                 e.printStackTrace();
                  // Restore interrupted state...
                 Thread.currentThread().interrupt();
