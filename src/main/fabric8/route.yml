@@ -1,0 +1,8 @@
+metadata:
+  name: openshift-tasks
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: openshift-tasks

@@ -1,0 +1,32 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: openshift-tasks
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: tasks
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /ws/demo/healthcheck
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 180
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /ws/demo/healthcheck
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+  triggers:
+    - type: ConfigChange
