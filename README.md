@@ -1,6 +1,6 @@
 OpenShift Tasks: JAX-RS, JPA quickstart 
 ==============================
-[![CircleCI](https://circleci.com/gh/OpenShiftDemos/openshift-tasks.svg?&style=shield&circle-token=1462d2d99334a912b32f758616eb39f6390a200b)](https://circleci.com/gh/OpenShiftDemos/openshift-tasks)
+[![Build Status](https://travis-ci.org/OpenShiftDemos/openshift-tasks.svg?branch=eap-7)](https://travis-ci.org/OpenShiftDemos/openshift-tasks)
 
 What is it?
 -----------
