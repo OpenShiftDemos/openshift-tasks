@@ -16,7 +16,7 @@ jdk:
 
 before_install:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - curl -sL -o $HOME/s2i.tar.gz https://github.com/openshift/source-to-image/releases/download/v1.1.10/source-to-image-v1.1.10-27f0729d-linux-amd64.tar.gz 
+  - curl -sL -o $HOME/s2i.tar.gz https://github.com/openshift/source-to-image/releases/download/v1.1.10/source-to-image-v1.1.10-27f0729d-linux-amd64.tar.gz
   - pushd $HOME/bin && tar xvfz $HOME/s2i.tar.gz && popd
 
 script:
