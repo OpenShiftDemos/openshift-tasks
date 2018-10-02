@@ -21,6 +21,5 @@ before_install:
 
 script:
   - mvn package
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - ${HOME}/bin/s2i build . openshift/wildfly-101-centos7 $IMAGE_REPO:$TAG
-  - docker push $IMAGE_REPO:$TAG
+  - ${HOME}/bin/s2i build . openshift/wildfly-101-centos7 $IMAGE_REPO:$TRAVIS_BRANCH-release
+  - docker push $IMAGE_REPO:$TRAVIS_BRANCH-release
