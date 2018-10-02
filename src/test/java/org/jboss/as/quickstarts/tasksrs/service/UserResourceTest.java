@@ -26,56 +26,56 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 @Category(UnitTest.class)
 public class UserResourceTest {
-	@InjectMocks
-	private UserResource userResource;
-	
-	@Mock
+    @InjectMocks
+    private UserResource userResource;
+
+    @Mock
     private UserDao userDao;
 
-	@Before
-	public void setupMocks() {
-		List<User> users = new LinkedList<>();
-		users.add(newUser("user1", randomTasks(1)));
-		users.add(newUser("user2", randomTasks(5)));
-		users.add(newUser("user3", randomTasks(3)));
-		
-		Mockito.when(userDao.getAll()).thenReturn(users);
-	}
+    @Before
+    public void setupMocks() {
+        List<User> users = new LinkedList<>();
+        users.add(newUser("user1", randomTasks(1)));
+        users.add(newUser("user2", randomTasks(5)));
+        users.add(newUser("user3", randomTasks(3)));
 
-	@Test
-	// TODO: comment out to make the test run
-	@Ignore
-	public void getUsersSortedByTask() {
-		List<User> users = userResource.getUsers();
+        Mockito.when(userDao.getAll()).thenReturn(users);
+    }
 
-		verify(userDao).getAll();
-		
-		assertEquals("user2", users.get(0).getUsername());
-		assertEquals("user3", users.get(1).getUsername());
-		assertEquals("user1", users.get(2).getUsername());
-		
-	}
-	
+    @Test
+    // TODO: comment out to make the test run
+    @Ignore
+    public void getUsersSortedByTask() {
+        List<User> users = userResource.getUsers();
 
-	// helper methods
-	
-	private User newUser(String username, Task...tasks) {
-		User user = new User();
-		user.setId(currentTimeMillis());
-		user.setUsername(username);
-		user.setTasks(asList(tasks));
-		return user;
-	}
-	
-	private Task[] randomTasks(int count) {
-		List<Task> tasks = new LinkedList<>();
-		for (int i = 0; i < count; i++) {
-			Task task = new Task();
-			task.setId(i * 1L);
-			task.setTitle("Task " + i);
-			tasks.add(task);
-		}
-		
-		return tasks.toArray(new Task[tasks.size()]);
-	}
+        verify(userDao).getAll();
+
+        assertEquals("user2", users.get(0).getUsername());
+        assertEquals("user3", users.get(1).getUsername());
+        assertEquals("user1", users.get(2).getUsername());
+
+    }
+
+
+    // helper methods
+
+    private User newUser(String username, Task...tasks) {
+        User user = new User();
+        user.setId(currentTimeMillis());
+        user.setUsername(username);
+        user.setTasks(asList(tasks));
+        return user;
+    }
+
+    private Task[] randomTasks(int count) {
+        List<Task> tasks = new LinkedList<>();
+        for (int i = 0; i < count; i++) {
+            Task task = new Task();
+            task.setId(i * 1L);
+            task.setTitle("Task " + i);
+            tasks.add(task);
+        }
+
+        return tasks.toArray(new Task[tasks.size()]);
+    }
 }

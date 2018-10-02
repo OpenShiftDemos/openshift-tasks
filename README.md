@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 REST-based Tasks Sample App for OpenShift
+=======
+OpenShift Tasks: JAX-RS, JPA quickstart
+>>>>>>> 3e8ed0a80e6ed3fad32a965ab131f84e65d258b7
 ==============================
 [![Build Status](https://travis-ci.org/OpenShiftDemos/openshift-tasks.svg?branch=master)](https://travis-ci.org/OpenShiftDemos/openshift-tasks)
 
