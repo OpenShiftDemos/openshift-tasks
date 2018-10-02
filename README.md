@@ -1,6 +1,6 @@
-OpenShift Tasks: JAX-RS, JPA quickstart 
+REST-based Tasks Sample App for OpenShift
 ==============================
-[![CircleCI](https://circleci.com/gh/OpenShiftDemos/openshift-tasks.svg?&style=shield&circle-token=1462d2d99334a912b32f758616eb39f6390a200b)](https://circleci.com/gh/OpenShiftDemos/openshift-tasks)
+[![Build Status](https://travis-ci.org/OpenShiftDemos/openshift-tasks.svg?branch=master)](https://travis-ci.org/OpenShiftDemos/openshift-tasks)
 
 What is it?
 -----------
