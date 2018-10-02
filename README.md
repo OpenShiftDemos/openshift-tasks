@@ -1,6 +1,7 @@
 REST-based Tasks Sample App for OpenShift
 ==============================
-[![Build Status](https://travis-ci.org/OpenShiftDemos/openshift-tasks.svg?branch=master)](https://travis-ci.org/OpenShiftDemos/openshift-tasks)
+[![Build Status](https://travis-ci.org/OpenShiftDemos/openshift-tasks.svg?branch=eap-7)](https://travis-ci.org/OpenShiftDemos/openshift-tasks)
+[![Docker Repository on Quay](https://quay.io/repository/siamaksade/tasks-sample-app/status "Docker Repository on Quay")](https://quay.io/repository/siamaksade/tasks-sample-app)
 
 What is it?
 -----------
