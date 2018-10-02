@@ -16,7 +16,6 @@ jdk:
 
 before_install:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - cp .travis.settings.xml $HOME/.m2/settings.xml
   - curl -sL -o $HOME/s2i.tar.gz https://github.com/openshift/source-to-image/releases/download/v1.1.10/source-to-image-v1.1.10-27f0729d-linux-amd64.tar.gz 
   - pushd $HOME/bin && tar xvfz $HOME/s2i.tar.gz && popd
 
