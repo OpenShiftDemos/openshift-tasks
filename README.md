@@ -2,7 +2,6 @@ REST-based Tasks Sample App for OpenShift
 ==============================
 [![Build Status](https://travis-ci.org/OpenShiftDemos/openshift-tasks.svg?branch=eap-7)](https://travis-ci.org/OpenShiftDemos/openshift-tasks)
 
-
 What is it?
 -----------
 a
