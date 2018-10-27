@@ -235,6 +235,36 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId>
+                <version>3.5.38</version>
+
+                <configuration>
+                    <images>
+                        <image>
+                            <name>openshift-tasks</name>
+                            <build>
+                                <from>registry.access.redhat.com/jboss-eap-7/eap71-openshift</from>
+                                <assembly>
+                                    <descriptorRef>rootWar</descriptorRef>
+                                    <targetDir>/opt/eap/standalone/deployments</targetDir>
+                                </assembly>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>fmp</id>
+                        <goals>
+                            <goal>resource</goal>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
