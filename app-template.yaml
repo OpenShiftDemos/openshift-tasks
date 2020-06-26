@@ -166,7 +166,9 @@ parameters:
 - description: Git source URI for application
   name: SOURCE_URL
   required: true
-  value: https://github.com/openshiftdemos/openshift-tasks
+  #value: http://testYOUR#-gogs.apps.cluster-CLUSTER_NAME.example.opentlc.com/testdrive/openshift-tasks
+  #value: https://github.com/mirkhala/openshift-tasks
+  value: https://magdamartinez@dev.azure.com/magdamartinez/OpenShift%20Tasks%20Web%20-%20Delivery%20plans/_git/openshift-tasks
 - description: Git branch/tag reference
   name: SOURCE_REF
-  value: master
+  value: blue

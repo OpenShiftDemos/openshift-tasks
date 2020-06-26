@@ -4,7 +4,7 @@
 <html lang="en-us">
 <!--<![endif]-->
   <head>
-    <title>OpenShift Demo Tasks</title>
+    <title>OpenShift Demo Tasks Blue</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +42,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/">
-          OpenShift Tasks Demo
+          OpenShift Tasks Blue
         </a>
       </div>
       <div class="collapse navbar-collapse navbar-collapse-1">
